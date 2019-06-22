@@ -1,30 +1,19 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import matchSorter from 'match-sorter';
-import Modal from 'react-modal';
+
+import StoryModal from './StoryModal';
 
 import 'react-table/react-table.css';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
-// bind modal to the app element
-Modal.setAppElement('#root');
 
 class StoriesTable extends React.Component {
 
   state = {
+    // table
     isLoading: true,
-    modalIsOpen: false,
     data: [],
+    // modal
+    modalIsOpen: false,
     modalContent: []
   }
 
@@ -39,6 +28,7 @@ class StoriesTable extends React.Component {
 
   // modal
   openModal = (id) => {
+    // fetch data & save it to modalContent
     fetch('/story/' + id)
       .then(res => res.json())
       .then(data => this.setState({
@@ -54,10 +44,10 @@ class StoriesTable extends React.Component {
   }
 
   render () {
-    // data
+    // table data
     const data = this.state.data;
 
-    // columns
+    // table columns
     const columns = [{
       Header: "Id",
       accessor: "objectID",
@@ -95,18 +85,11 @@ class StoriesTable extends React.Component {
             defaultPageSize={50}
             className="-striped -highlight"
           />
-          <Modal
+          <StoryModal
             isOpen={this.state.modalIsOpen}
+            modalContent={this.state.modalContent}
             onRequestClose={this.closeModal}
-            style={customStyles}
-          >
-            <div>
-              <h1>Title: {this.state.modalContent.title}</h1>
-              <p>Author: {this.state.modalContent.author}</p>
-              <p><a href={this.state.modalContent.url}>Link</a></p>
-              <button onClick={this.closeModal}>Close</button>
-            </div>
-          </Modal>
+          />
         </div>
     );
   }

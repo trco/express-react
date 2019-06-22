@@ -22,6 +22,6 @@ const App = () => (
       <Route path='/stories' component={StoriesTable}/>
     </Router>
   </div>
-)
+);
 
 export default App;
