@@ -12,9 +12,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({ data: users }));
+    fetch('/stories')
+    .then(res => res.json())
+    .then(data => this.setState({ data: JSON.parse(data.body).hits }));
   }
 
   render () {
@@ -26,14 +26,21 @@ class App extends React.Component {
       columns: [
         {
           Header: "Id",
-          accessor: "id",
+          accessor: "objectID",
           filterable: false
         },
         {
-          Header: "Name",
-          accessor: "name",
+          Header: "Title",
+          accessor: "title",
           filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["name"] }),
+            matchSorter(rows, filter.value, { keys: ["title"] }),
+          filterAll: true
+        },
+        {
+          Header: "Author",
+          accessor: "author",
+          filterMethod: (filter, rows) =>
+            matchSorter(rows, filter.value, { keys: ["author"] }),
           filterAll: true
         },
         {
