@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.get('/', index.index);
 app.get('/stories', story.stories);
+app.get('/story/:id', story.story);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
