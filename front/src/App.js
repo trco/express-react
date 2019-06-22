@@ -38,7 +38,7 @@ class App extends React.Component {
         },
         {
           Header: "Actions",
-          Cell: <><a href='#'>Details</a> <a href='#'>Delete</a></>,
+          Cell: <><a href='/'>Details</a> <a href='/'>Delete</a></>,
           filterable: false
         },
       ]
