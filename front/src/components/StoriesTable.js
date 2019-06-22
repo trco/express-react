@@ -14,7 +14,10 @@ class StoriesTable extends React.Component {
   componentDidMount() {
     fetch('/stories')
     .then(res => res.json())
-    .then(data => this.setState({ data: JSON.parse(data.body).hits }));
+    .then(data => this.setState({
+      data: JSON.parse(data.body).hits,
+      isLoading: false
+    }));
   }
 
   render () {
@@ -48,13 +51,15 @@ class StoriesTable extends React.Component {
     }]
 
     return (
-      <ReactTable
-        data={data}
-        filterable
-        columns={columns}
-        defaultPageSize={50}
-        className="-striped -highlight"
-      />
+      this.state.isLoading ?
+        <div>Loading ...</div> :
+        <ReactTable
+          data={data}
+          filterable
+          columns={columns}
+          defaultPageSize={50}
+          className="-striped -highlight"
+        />
     );
   }
 }
