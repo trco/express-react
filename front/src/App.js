@@ -58,7 +58,7 @@ class App extends React.Component {
           data={data}
           filterable
           columns={columns}
-          defaultPageSize={5}
+          defaultPageSize={50}
           className="-striped -highlight"
         />
       </div>
