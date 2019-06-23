@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import { Container, Row } from 'react-bootstrap';
+import {Container, Row} from 'react-bootstrap';
 
 import StoriesTable from './components/StoriesTable';
 

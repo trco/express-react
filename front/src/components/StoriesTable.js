@@ -1,10 +1,12 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 // import matchSorter from 'match-sorter';
 
 import StoryModal from './StoryModal';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
 class StoriesTable extends React.Component {
 
@@ -67,6 +69,7 @@ class StoriesTable extends React.Component {
             keyField='id'
             data={stories}
             columns={columns}
+            pagination={paginationFactory()}
             bootstrap4={true}
           />
           <StoryModal
