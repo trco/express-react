@@ -11,7 +11,7 @@ class StoriesTable extends React.Component {
   state = {
     // table
     isLoading: true,
-    data: [],
+    stories: [],
     // modal
     modalIsOpen: false,
     modalContent: []
@@ -20,8 +20,8 @@ class StoriesTable extends React.Component {
   componentDidMount() {
     fetch('/stories')
       .then(res => res.json())
-      .then(data => this.setState({
-        data: JSON.parse(data.body).hits,
+      .then(stories => this.setState({
+        stories: JSON.parse(stories.body).hits,
         isLoading: false
       }));
   }
@@ -31,8 +31,8 @@ class StoriesTable extends React.Component {
     // fetch data & save it to modalContent
     fetch('/story/' + id)
       .then(res => res.json())
-      .then(data => this.setState({
-        modalContent: JSON.parse(data.body),
+      .then(story => this.setState({
+        modalContent: JSON.parse(story.body),
         modalIsOpen: true
       }));
   }
@@ -45,7 +45,7 @@ class StoriesTable extends React.Component {
 
   render () {
     // table data
-    const data = this.state.data;
+    const stories = this.state.stories;
 
     // table columns
     const columns = [{
@@ -79,7 +79,7 @@ class StoriesTable extends React.Component {
         <div>Loading ...</div> :
         <div>
           <ReactTable
-            data={data}
+            data={stories}
             filterable
             columns={columns}
             defaultPageSize={50}
