@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactTable from 'react-table';
-import matchSorter from 'match-sorter';
+import BootstrapTable from 'react-bootstrap-table-next';
+// import matchSorter from 'match-sorter';
 
 import StoryModal from './StoryModal';
 
-import 'react-table/react-table.css';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 class StoriesTable extends React.Component {
 
@@ -49,41 +49,25 @@ class StoriesTable extends React.Component {
 
     // table columns
     const columns = [{
-      Header: "Id",
-      accessor: "objectID",
-      filterable: false
-    },
-    {
-      Header: "Title",
-      accessor: "title",
-      filterMethod: (filter, rows) =>
-        matchSorter(rows, filter.value, { keys: ["title"] }),
-      filterAll: true
-    },
-    {
-      Header: "Author",
-      accessor: "author",
-      filterMethod: (filter, rows) =>
-        matchSorter(rows, filter.value, { keys: ["author"] }),
-      filterAll: true
-    },
-    {
-      Header: "Actions",
-      accessor: "objectID",
-      Cell: id => <><span onClick={() => this.openModal(id.value)} style={{cursor: 'pointer'}}>Details</span></>,
-      filterable: false
-    }]
+      dataField: 'objectID',
+      text: 'Id'
+    }, {
+      dataField: 'title',
+      text: 'Title'
+    }, {
+      dataField: 'author',
+      text: 'Author'
+    }];
 
     return (
       this.state.isLoading ?
         <div>Loading ...</div> :
         <div>
-          <ReactTable
+          <BootstrapTable
+            keyField='id'
             data={stories}
-            filterable
             columns={columns}
-            defaultPageSize={50}
-            className="-striped -highlight"
+            bootstrap4={true}
           />
           <StoryModal
             isOpen={this.state.modalIsOpen}
