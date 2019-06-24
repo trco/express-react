@@ -1,6 +1,7 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 import StoryModal from './StoryModal';
 import {paginationOptions} from './settings';
@@ -64,10 +65,16 @@ class StoriesTable extends React.Component {
     text: 'Id'
   }, {
     dataField: 'title',
-    text: 'Title'
+    text: 'Story Title',
+    filter: textFilter({
+      placeholder: 'Search by title...'
+    })
   }, {
     dataField: 'author',
-    text: 'Author'
+    text: 'Story Author',
+    filter: textFilter({
+      placeholder: 'Search by author...'
+    })
   }, {
     dataField: 'objectID',
     text: 'Actions',
@@ -83,6 +90,7 @@ class StoriesTable extends React.Component {
             keyField='id'
             data={this.state.stories}
             columns={this.columns}
+            filter={filterFactory()}
             pagination={paginationFactory(paginationOptions)}
             bootstrap4={true}
           />
